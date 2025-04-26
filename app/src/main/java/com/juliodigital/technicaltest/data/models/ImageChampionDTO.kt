@@ -1,6 +1,6 @@
 package com.juliodigital.technicaltest.data.models
 
-import com.juliodigital.technicaltest.utils.Constants
+import com.juliodigital.technicaltest.utils.constants.Constants
 
 data class ImageChampionDTO (
     val full: String? = Constants.EMPTY_STRING,

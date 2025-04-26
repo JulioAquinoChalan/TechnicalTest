@@ -1,6 +1,6 @@
 package com.juliodigital.technicaltest.domain.repository
 
-import com.juliodigital.technicaltest.domain.model.Champion
+import com.juliodigital.technicaltest.domain.model.ChampionModel
 import com.juliodigital.technicaltest.data.repository.ChampionsRepositoryInterface
 import com.juliodigital.technicaltest.data.models.championData.ChampionDataDTO
 import com.juliodigital.technicaltest.data.models.championData.toDomain
@@ -13,7 +13,7 @@ class ChampionsRepositoryImp: ChampionsRepositoryInterface {
 
     var api = RetrofitInstance.api
 
-    override fun getChampionByName(call: (List<Champion>?) -> Unit) {
+    override fun getChampionByName(call: (List<ChampionModel>?) -> Unit) {
         api.getChampions()
             .enqueue(object: Callback<ChampionDataDTO> {
                 override fun onResponse(

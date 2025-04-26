@@ -1,33 +1,36 @@
-package com.juliodigital.technicaltest.presentation.videoFolders
+package com.juliodigital.technicaltest.presentation.home
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import com.juliodigital.technicaltest.presentation.home.factory.HomeViewModelFactory
 import com.juliodigital.technicaltest.presentation.videoFolders.factory.VideoViewModelFactory
+import com.juliodigital.technicaltest.presentation.home.viewModel.HomeViewModel
+import com.juliodigital.technicaltest.presentation.home.views.HomeScreen
 import com.juliodigital.technicaltest.presentation.videoFolders.viewModel.VideoViewModel
-import com.juliodigital.technicaltest.presentation.videoFolders.views.VideoFoldersScreen
 import com.juliodigital.technicaltest.ui.theme.TechnicalTestTheme
-import kotlin.getValue
 
-class VideoFoldersActivity : ComponentActivity() {
+class HomeActivity : ComponentActivity() {
 
     private val videoViewModelFactory by lazy { VideoViewModelFactory(applicationContext) }
+    private val homeViewModelFactory by lazy { HomeViewModelFactory() }
+
+    private val viewModel: HomeViewModel by viewModels { homeViewModelFactory }
     private val videoViewModel: VideoViewModel by viewModels { videoViewModelFactory }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val folderName = intent.getStringExtra("folderName") ?: ""
         setContent {
             TechnicalTestTheme {
-                VideoFoldersScreen(videoViewModel, folderName)
+                HomeScreen(viewModel, videoViewModel)
             }
+            videoViewModel.loadVideos()
+            videoViewModel.loadFolders()
         }
     }
-
-    override fun onResume() {
-        super.onResume()
-        videoViewModel.loadVideos()
-    }
 }
+
+
+

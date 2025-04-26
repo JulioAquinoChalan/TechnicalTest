@@ -1,11 +1,10 @@
 package com.juliodigital.technicaltest.domain.userCase
 
-import android.graphics.Bitmap
-import com.juliodigital.technicaltest.domain.model.VideoItem
 import com.juliodigital.technicaltest.data.repository.VideoRepositoryInterface
+import com.juliodigital.technicaltest.domain.model.VideoItemModel
 
 class GetAllVideosUseCase(private val repository: VideoRepositoryInterface) {
-    suspend operator fun invoke(): List<VideoItem> {
+    suspend operator fun invoke(): List<VideoItemModel> {
         return repository.getAllVideos()
     }
 }

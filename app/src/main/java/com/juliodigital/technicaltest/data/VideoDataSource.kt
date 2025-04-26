@@ -7,7 +7,7 @@ import android.media.MediaMetadataRetriever
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
-import com.juliodigital.technicaltest.domain.model.VideoItem
+import com.juliodigital.technicaltest.domain.model.VideoItemModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.net.URI
@@ -17,8 +17,8 @@ class VideoDataSource(private val context: Context) {
 
     var cache: MutableMap<Uri, Bitmap?> = mutableMapOf()
 
-    suspend fun getAllVideos(): List<VideoItem> = withContext(Dispatchers.IO) {
-        val videos = mutableListOf<VideoItem>()
+    suspend fun getAllVideos(): List<VideoItemModel> = withContext(Dispatchers.IO) {
+        val videos = mutableListOf<VideoItemModel>()
         val collection = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
 
         val projection = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -54,7 +54,7 @@ class VideoDataSource(private val context: Context) {
                 val fullPath = pathColumn?.let { cursor.getString(it)?.trimEnd('/') }
                 val folder = fullPath?.split("/")?.lastOrNull() ?: "Desconocido"
                 val contentUri = ContentUris.withAppendedId(collection, id)
-                videos.add(VideoItem(
+                videos.add(VideoItemModel(
                     id = id,
                     title = title,
                     contentUri = contentUri,

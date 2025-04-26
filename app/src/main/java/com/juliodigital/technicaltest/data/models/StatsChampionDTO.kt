@@ -1,6 +1,6 @@
 package com.juliodigital.technicaltest.data.models
 
-import com.juliodigital.technicaltest.utils.Constants
+import com.juliodigital.technicaltest.utils.constants.Constants
 
 data class StatsChampionDTO(
     val hp: Int? = Constants.ZERO,
