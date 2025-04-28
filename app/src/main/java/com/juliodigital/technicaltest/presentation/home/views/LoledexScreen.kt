@@ -2,12 +2,14 @@ package com.juliodigital.technicaltest.presentation.home.views
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -40,32 +42,42 @@ fun LoledexScreen(viewModel: HomeViewModel) {
     var selectedChampion by remember { mutableStateOf<ChampionModel?>(null) }
     var showSheet by remember { mutableStateOf(false) }
 
-    LazyColumn(Modifier.padding(10.dp)) {
-        items (rows) { rowItems ->
-            Row(
-                modifier = Modifier.fillMaxWidth().padding(8.dp),
-                horizontalArrangement = Arrangement.spacedBy(24.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                rowItems.forEach {
-                    ItemChampion(
-                        champ = it,
-                        modifier = Modifier
-                            .weight(1f)
-                            .clickable {
-                                selectedChampion = it
-                                showSheet = true
-                                coroutineScope.launch {
-                                    sheetState.show()
+    if(model.champions == null) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            CircularProgressIndicator()
+        }
+    } else {
+        LazyColumn(Modifier.padding(10.dp)) {
+            items (rows) { rowItems ->
+                Row(
+                    modifier = Modifier.fillMaxWidth().padding(8.dp),
+                    horizontalArrangement = Arrangement.spacedBy(24.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    rowItems.forEach {
+                        ItemChampion(
+                            champ = it,
+                            modifier = Modifier
+                                .weight(1f)
+                                .clickable {
+                                    selectedChampion = it
+                                    showSheet = true
+                                    coroutineScope.launch {
+                                        sheetState.show()
+                                    }
                                 }
-                            }
-                    )
-                }
-                if (rowItems.size == 1) {
-                    Spacer(modifier = Modifier.weight(1f))
+                        )
+                    }
+                    if (rowItems.size == 1) {
+                        Spacer(modifier = Modifier.weight(1f))
+                    }
                 }
             }
         }
+
     }
 
     if (showSheet && selectedChampion != null) {
