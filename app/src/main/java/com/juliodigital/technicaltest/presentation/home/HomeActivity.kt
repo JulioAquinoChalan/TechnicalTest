@@ -26,8 +26,7 @@ class HomeActivity : ComponentActivity() {
             TechnicalTestTheme {
                 HomeScreen(viewModel, videoViewModel)
             }
-            videoViewModel.loadVideos()
-            videoViewModel.loadFolders()
+
         }
     }
 }
