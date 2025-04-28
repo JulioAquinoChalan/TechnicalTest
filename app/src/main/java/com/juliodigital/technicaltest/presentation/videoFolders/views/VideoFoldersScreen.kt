@@ -34,7 +34,9 @@ fun VideoFoldersScreen(videoViewModel: VideoViewModel, folderName: String) {
 
         LazyColumn {
             items(filtered) { video ->
-                VideoItemView(video = video)
+                VideoItemView(
+                    video = video
+                )
             }
         }
     }

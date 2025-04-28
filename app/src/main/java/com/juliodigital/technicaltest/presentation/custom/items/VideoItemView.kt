@@ -26,8 +26,8 @@ fun VideoItemView(
     val context = LocalContext.current
     Row (
         modifier = modifier
-            .fillMaxWidth()
             .padding(8.dp)
+            .fillMaxWidth()
             .clickable {
                 val intent = Intent(context, VideoPlayerActivity::class.java).apply {
                     putExtra("uriContent", video.contentUri)

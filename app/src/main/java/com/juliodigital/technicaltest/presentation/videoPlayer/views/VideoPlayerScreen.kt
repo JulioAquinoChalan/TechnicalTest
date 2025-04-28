@@ -3,7 +3,10 @@ package com.juliodigital.technicaltest.presentation.videoPlayer.views
 import android.net.Uri
 import android.view.ViewGroup
 import androidx.annotation.OptIn
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
@@ -11,8 +14,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
@@ -34,7 +39,7 @@ fun VideoFormSelectorScreen(uri: Uri?, idYoutube: String?) {
     } else if(idYoutube != null) {
         VideoPlayerYoutubeScreen(idYoutube)
     } else {
-        Text("No hay video")
+        NotVideo()
     }
 }
 
@@ -84,43 +89,69 @@ private fun VideoPlayerView(uri: Uri) {
         }
     }
 
-    AndroidView(
-        factory = {
-            PlayerView(it).apply {
-                player = exoPlayer
-                useController = true
-                layoutParams =
-                    ViewGroup.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.MATCH_PARENT
-                    )
-            }
-        },
+    Column (
         modifier = Modifier
-            .fillMaxWidth()
-            .aspectRatio(16 / 9f)
-    )
+            .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ){
+        AndroidView(
+            factory = {
+                PlayerView(it).apply {
+                    player = exoPlayer
+                    useController = true
+                    layoutParams =
+                        ViewGroup.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.MATCH_PARENT
+                        )
+                }
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(16 / 9f)
+        )
+    }
 }
 
 @Composable
 private fun VideoPlayerYoutubeScreen(videoId: String) {
     val lifecycle = LocalLifecycleOwner.current.lifecycle
 
-    AndroidView(
-        factory = {
-            YouTubePlayerView(it).apply {
-                lifecycle.addObserver(this)
-
-                addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
-                    override fun onReady(youTubePlayer: YouTubePlayer) {
-                        youTubePlayer.loadVideo(videoId, 0f)
-                    }
-                })
-            }
-        },
+    Column (
         modifier = Modifier
-            .fillMaxWidth()
-            .aspectRatio(16 / 9f)
-            .padding(10.dp)
-    )
+            .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ){
+        AndroidView(
+            factory = {
+                YouTubePlayerView(it).apply {
+                    lifecycle.addObserver(this)
+
+                    addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+                        override fun onReady(youTubePlayer: YouTubePlayer) {
+                            youTubePlayer.loadVideo(videoId, 0f)
+                        }
+                    })
+                }
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(16 / 9f)
+                .padding(10.dp)
+        )
+    }
+}
+
+@Composable
+private fun NotVideo() {
+    Column (
+        modifier = Modifier
+            .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ){
+        Text("No hay video")
+    }
 }
