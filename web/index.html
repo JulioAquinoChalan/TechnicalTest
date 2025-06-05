@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Términos y Condiciones</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="container">
+        <h1>PRUEBA Términos y Condiciones Generales de Uso para la Aplicación Android</h1>
+        <button onclick="performAction(123, 'active')">Enviar Mensaje</button>
+        <h2>Aceptación de los Términos</h2>
+        <p>Al utilizar la Aplicación, aceptas automáticamente estos Términos y te comprometes a cumplir con todas las disposiciones contenidas en ellos. Si no estás de acuerdo con alguno de los términos establecidos aquí, te rogamos que no utilices la Aplicación.</p>
+
+        <h2>Funcionalidades de la Aplicación</h2>
+        <ul>
+            <li>Toma de fotos: La Aplicación permite tomar y almacenar fotos utilizando la cámara del dispositivo móvil.</li>
+            <li>Lectura de contactos: Se requiere acceso a los contactos del dispositivo móvil para facilitar ciertas funciones dentro de la Aplicación.</li>
+            <li>Envío de mensajes entre usuarios: La Aplicación incluye un apartado dedicado al envío de mensajes entre los usuarios registrados.</li>
+            <li>Visualización de widgets: La Aplicación muestra widgets con información relevante para el usuario.</li>
+            <li>Registro mediante número telefónico y verificación OTP: La creación de cuentas en la Aplicación se realiza mediante la introducción de un número telefónico y la verificación a través de un código OTP (One Time Password).</li>
+            <li>Utilización de alias: Los usuarios tienen la opción de utilizar alias en lugar de nombres reales para vincularlos con su número telefónico.</li>
+            <li>Almacenamiento de fotos: Las fotos tomadas con la Aplicación se almacenan en la cuenta del usuario y se conservan hasta que el usuario decida eliminar su cuenta.</li>
+        </ul>
+        
+        <h2>Responsabilidades del Usuario</h2>
+        <p>Al utilizar la Aplicación, aceptas que eres el único responsable del uso que hagas de la misma y de cualquier contenido que compartas a través de ella. Te comprometes a utilizar la Aplicación de manera legal y ética, respetando los derechos de terceros y cumpliendo con todas las leyes y regulaciones aplicables.</p>
+        
+        <h2>Privacidad y Seguridad</h2>
+        <p>Entendemos la importancia de la privacidad y la seguridad de tus datos. Para obtener más información sobre cómo recopilamos, utilizamos y protegemos tus datos personales, consulta nuestra Política de Privacidad.</p>
+        
+        <h2>Modificaciones y Actualizaciones</h2>
+        <p>Nos reservamos el derecho de realizar modificaciones o actualizaciones en estos Términos en cualquier momento y sin previo aviso. Te recomendamos que revises periódicamente estos Términos para estar al tanto de cualquier cambio. El uso continuado de la Aplicación después de la publicación de los cambios constituirá tu aceptación de los mismos.</p>
+        
+        <h2>Contacto</h2>
+        <p>Si tienes alguna pregunta, comentario o inquietud sobre estos Términos o sobre la Aplicación en general, no dudes en ponerte en contacto con nosotros a través de los medios proporcionados en la Aplicación.</p>
+        
+        <p class="disclaimer">Al utilizar la Aplicación, aceptas estar legalmente vinculado por estos Términos y Condiciones Generales de Uso. Si no estás de acuerdo con estos términos, por favor, abstente de utilizar la Aplicación.</p>
+    </div>
+    <script type="text/javascript">
+        function modificarTitulo(nuevoTitulo) {
+            document.querySelector('h1').textContent = nuevoTitulo;
+        }
+        
+        function performAction(id, status) {
+            window.location.href = `myapp://action?id=${id}&status=${status}`
+        }
+    </script>
+</body>
+</html>
